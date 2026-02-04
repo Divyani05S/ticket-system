@@ -493,7 +493,7 @@ export interface ApiTicketTicket extends Struct.CollectionTypeSchema {
       'api::ticket.ticket'
     > &
       Schema.Attribute.Private;
-    priority: Schema.Attribute.Enumeration<['Low', 'Meduim', 'High']>;
+    priority: Schema.Attribute.Enumeration<['Low', 'Medium', 'High']>;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;

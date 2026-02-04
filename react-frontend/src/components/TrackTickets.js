@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config';
 
 const TrackTickets = () => {
     const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ const TrackTickets = () => {
 
         try {
             // Strapi 5 dynamic filtering
-            const response = await axios.get(`http://localhost:1337/api/tickets?filters[email][$eq]=${email}`);
+            const response = await axios.get(API_ENDPOINTS.GET_TICKET(email));
             setTickets(response.data.data);
         } catch (err) {
             console.error('Tracking error:', err);
@@ -52,8 +53,7 @@ const TrackTickets = () => {
     };
 
     const PriorityBadge = ({ priority }) => {
-        // Handle backend typo "Meduim" for display
-        const displayPriority = priority === 'Meduim' ? 'Medium' : (priority || 'Low');
+        const displayPriority = priority || 'Low';
         const className = `priority-${displayPriority.toLowerCase()}`;
         return <span className={`badge ${className}`}>{displayPriority}</span>;
     };

@@ -26,7 +26,7 @@
       "type": "enumeration",
       "enum": [
         "Low",
-        "Meduim",
+        "Medium",
         "High"
       ]
     },

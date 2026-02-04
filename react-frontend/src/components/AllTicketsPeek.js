@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config';
 
 const AllTicketsPeek = ({ isOpen, onClose }) => {
     const [tickets, setTickets] = useState([]);
@@ -10,7 +11,7 @@ const AllTicketsPeek = ({ isOpen, onClose }) => {
             const fetchAll = async () => {
                 setLoading(true);
                 try {
-                    const response = await axios.get('http://localhost:1337/api/tickets?sort=createdAt:desc&pagination[limit]=10');
+                    const response = await axios.get(API_ENDPOINTS.PEEK_TICKETS);
                     setTickets(response.data.data);
                 } catch (err) {
                     console.error('Peek-a-boo error:', err);
@@ -45,7 +46,7 @@ const AllTicketsPeek = ({ isOpen, onClose }) => {
                                 <div className="peek-item-top">
                                     <span className="peek-title">{getVal(t, 'title')}</span>
                                     <span className={`peek-badge ${(getVal(t, 'priority') || 'Low').toLowerCase()}`}>
-                                        {getVal(t, 'priority') === 'Meduim' ? 'Medium' : (getVal(t, 'priority') || 'Low')}
+                                        {getVal(t, 'priority') || 'Low'}
                                     </span>
                                 </div>
                                 <div className="peek-email">{getVal(t, 'email')}</div>

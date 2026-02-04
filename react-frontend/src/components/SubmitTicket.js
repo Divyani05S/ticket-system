@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config';
 
 const SubmitTicket = () => {
     const [formData, setFormData] = useState({
@@ -62,16 +63,11 @@ const SubmitTicket = () => {
         setStatus({ type: '', message: '' });
 
         try {
-            // Note: Strapi 5 uses a typo "Meduim" in your schema. 
-            // We map internal "Medium" to schema "Meduim" for backend compatibility.
             const payload = {
-                data: {
-                    ...formData,
-                    priority: formData.priority === 'Medium' ? 'Meduim' : formData.priority
-                }
+                data: formData
             };
 
-            await axios.post('http://localhost:1337/api/tickets', payload);
+            await axios.post(API_ENDPOINTS.TICKETS, payload);
 
             setStatus({ type: 'success', message: 'Ticket submitted successfully!' });
             setFormData({ title: '', email: '', priority: 'Medium', description: '' });
