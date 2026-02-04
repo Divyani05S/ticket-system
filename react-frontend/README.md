@@ -1,70 +1,144 @@
-# Getting Started with Create React App
+# Ticket System - Frontend Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the **Frontend Client** for the Ticket Management System. This Single Page Application (SPA) is built with **React** to provide a seamless interface for users to submit, track, and monitor support tickets. It interacts with a Strapi backend/API service.
 
-## Available Scripts
+## 🌟 Key Features
 
-In the project directory, you can run:
+### 1. 🎫 Submit Tickets
+- **Purpose**: Allow users to raise new support requests.
+- **Capabilities**:
+  - Dynamic Form Validation (Client-side).
+  - Priority selection (Low, Medium, High).
+  - Real-time feedback on submission success or failure.
+  
+### 2. 🔍 Track Status
+- **Purpose**: Enable users to check the status of their reported issues.
+- **Capabilities**:
+  - Lookup by Email Address.
+  - View detailed ticket status (Open, In Progress, Resolved).
+  - View Ticket ID and full description.
 
-### `npm start`
+### 3. 👀 Live Activity (AllTicketsPeek)
+- **Purpose**: Social proof and transparency.
+- **Capabilities**:
+  - "Peek-a-boo" drawer showing the 10 most recent global tickets.
+  - Auto-updates based on user interaction (Close/Open).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Technical Architecture
 
-### `npm test`
+### Core Stack
+- **Framework**: React 19 (Functional Components + Hooks)
+- **Build Tool**: Create React App (React Scripts 5.0.1)
+- **HTTP Client**: Axios (Promise-based API calls)
+- **Styling**: Vanilla CSS (Global variables + Component-scoped styles)
+- **Testing**: React Testing Library
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Project Structure
+```bash
+react-frontend/
+├── public/              # Static assets (index.html, manifest)
+├── src/
+│   ├── assets/          # Images and icons
+│   ├── components/      # Functional UI Components
+│   │   ├── AllTicketsPeek.js  # Recent activity drawer
+│   │   ├── SubmitTicket.js    # Submission form logic
+│   │   └── TrackTickets.js    # Status lookup logic
+│   ├── App.js           # Main layout application wrapper
+│   ├── App.css          # Main layout styles
+│   ├── config.js        # Centralized API configuration
+│   ├── index.css        # Global Design System (Vars, Reset)
+│   └── index.js         # Entry point
+└── package.json         # Dependencies and Scripts
+```
 
-### `npm run build`
+### Configuration
+The application uses a centralized configuration file `src/config.js` to manage environment-specific settings.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Environment Variables:**
+- `NODE_ENV`: Automatically set by React Scripts (`development` vs `production`).
+- `REACT_APP_API_URL`: (Optional) Override backend URL.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Defaults:**
+- **Development**: `http://localhost:1337` (Standard Strapi port)
+- **Production**: `https://ticket-backend1.onrender.com`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🚀 Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
+- Node.js (v14 or higher recommended)
+- npm or yarn
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installation
+1. Clone the repository and navigate to the frontend folder:
+   ```bash
+   cd react-frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Running Locally
+Start the development server with Hot Module Replacement (HMR):
+```bash
+npm start
+```
+- Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Building for Production
+Create an optimized, minified bundle:
+```bash
+npm run build
+```
+- The output will be in the `build/` directory.
+- This folder is ready to be deployed to static hosting (Vercel, Netlify, Render, etc.).
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔌 API Integration
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application communicates with the backend via RESTful endpoints defined in `src/config.js`.
 
-### Code Splitting
+| Feature | Endpoint | Method | Description |
+|---------|----------|--------|-------------|
+| **Submit** | `/api/tickets` | `POST` | Creates a new ticket entry. |
+| **Track** | `/api/tickets` | `GET` | Filters tickets by `email` query param. |
+| **Peek** | `/api/tickets` | `GET` | Fetches recent tickets with sorting & pagination. |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 🎨 Styling & Design System
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The project uses a CSS variable-based design system defined in `src/index.css`.
 
-### Making a Progressive Web App
+**Key Variables:**
+- `--primary`: Main brand color.
+- `--bg-dark`, `--bg-card`: Dark mode background shades.
+- `--text-main`, `--text-muted`: Typography colors.
+- `--success`, `--warning`, `--error`: Status indicators.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+To modify the theme, edit the `:root` variables in `src/index.css`.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📚 Advanced Documentation
 
-### Deployment
+For detailed architecture decisions and analysis, refer to the **BMAD Generated Documentation** located in `BMAD/_bmad-output/`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- [**Architecture.md**](BMAD/_bmad-output/architecture.md): Deep dive into data flow and patterns.
+- [**Component-Inventory.md**](BMAD/_bmad-output/component-inventory.md): Detailed breakdown of all UI components.
+- [**Development-Guide.md**](BMAD/_bmad-output/development-guide.md): Extended setup and contribution practices.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🤝 Contributing
+
+1. Fork the repository.
+2. Create feature branch: `git checkout -b feature/AmazingFeature`
+3. Commit changes: `git commit -m 'Add some AmazingFeature'`
+4. Push to branch: `git push origin feature/AmazingFeature`
+5. Open a Pull Request.

@@ -78,9 +78,16 @@ const SubmitTicket = () => {
 
         } catch (error) {
             console.error('Submission error:', error);
+            console.error('Error details:', error.response?.data); // Log full details
+
+            // Extract Strapi error message
+            const serverMessage = error.response?.data?.error?.message ||
+                error.response?.data?.message || // Fallback for some versions
+                'Unable to submit ticket. Please try again later.';
+
             setStatus({
                 type: 'error',
-                message: 'Unable to submit ticket. Please try again later.'
+                message: serverMessage
             });
         } finally {
             setLoading(false);
