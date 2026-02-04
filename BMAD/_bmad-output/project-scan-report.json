@@ -1,0 +1,40 @@
+{
+    "project_name": "Support Ticket System",
+    "scan_timestamp": "2026-02-05T01:30:00Z",
+    "project_type": "Multi-part Web Application",
+    "parts": [
+        {
+            "name": "react-frontend",
+            "type": "React 19 SPA",
+            "critical_files": [
+                "src/App.js",
+                "src/components/SubmitTicket.js",
+                "src/index.css"
+            ],
+            "dependencies": {
+                "react": "^19.2.4",
+                "axios": "^1.13.4"
+            }
+        },
+        {
+            "name": "strapi-backend",
+            "type": "Strapi 5 Headless CMS",
+            "critical_files": [
+                "src/api/ticket/content-types/ticket/schema.json"
+            ],
+            "dependencies": {
+                "@strapi/strapi": "5.34.0",
+                "better-sqlite3": "12.4.1"
+            }
+        }
+    ],
+    "findings": {
+        "total_components": 3,
+        "total_endpoints": 1,
+        "detected_debt": [
+            "Hardcoded API URLs",
+            "Schema typo: Meduim"
+        ]
+    },
+    "status": "Healthy"
+}
